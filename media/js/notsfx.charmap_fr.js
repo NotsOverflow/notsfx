@@ -30,6 +30,7 @@ var nfxCharMap = {
 	187 : "=",
 	8   : "BKSPACE",
 	13  : "ENTER",
+	20  : "VERRMAJ",
 	221  : "^",
 	65  : "A",
 	90  : "Z",

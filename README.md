@@ -1,17 +1,25 @@
 notsfx
 ======
 
- Yet an other simple javascript engine
+ Yet an other simple javascript game engine
 
 - todo:
 
->	add camera api
+>	add webrtc api ( maybe peerJS )
+
+>	add multiple camera api for opera, firefox and ie
 
 >	find why some combination key don't add up ( c,v,b,n )
 
->	add effect prototype ( jquery.animate-like )
+>	add effect prototypes ( jquery.animate-like )
 
->	add create media prototype
+>	add create media prototypes
+
+- changelog 0.2:
+
+>	added multiple cam api for chrome
+
+>	using json option array with default value
 	
 - changelog 0.1:
 
