@@ -26,11 +26,8 @@ var Point3D = function(){
 		return angles;	
 	};
 	this.incAnglesXY = function(angles){
-		if(angles[0]==360){
-			return [0,0,angles[2]];
-		}
-		angles[0] = angles[0] + 1;
-		angles[1] = angles[1] + 1;
+		angles[0] = (angles[0] + 1) % 360 ;
+		angles[1] = (angles[1] + 1) % 360 ;
 		return angles;	
 	};
 	this.rotX = function(points,angle){
