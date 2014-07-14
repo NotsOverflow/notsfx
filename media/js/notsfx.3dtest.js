@@ -20,12 +20,17 @@ var Point3D = function(){
 		return points;
 	};
 	this.incAngles = function(angles){
+		angles[0] = ( angles[0] + 1 ) % 360 ;
+		angles[1] = ( angles[1] + 1 ) % 360 ;
+		angles[2] = ( angles[2] + 1 ) % 360 ;
+		return angles;	
+	};
+	this.incAnglesXY = function(angles){
 		if(angles[0]==360){
-			return [0,0,0];
+			return [0,0,angles[2]];
 		}
 		angles[0] = angles[0] + 1;
 		angles[1] = angles[1] + 1;
-		angles[2] = angles[2] + 1;
 		return angles;	
 	};
 	this.rotX = function(points,angle){
@@ -57,7 +62,7 @@ var Point3D = function(){
 		var factor = fov / (view_distance + points[2])
 		var x = points[0] * factor + width / 2
 		var y = -points[1] * factor + height / 2
-        return [x, y, 1];
+        return [x, y, points[2]];
 	};
 	return this;
 };

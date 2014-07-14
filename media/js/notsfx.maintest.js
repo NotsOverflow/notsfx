@@ -32,7 +32,7 @@ documentReady(function(){
 			[1,-1,1],
 			[-1,-1,1]
 		];
-		this.faces = [[0,1,2,3,"#FF0000"],[1,5,6,2,"#00FF00"],[5,4,7,6,"#0000FF"],[4,0,3,7,"#FF0000"],[0,4,5,1,"#00FF00"],[3,2,6,7,"#0000FF"]];
+		this.faces = [[0,1,2,3,"#FF0000"],[1,5,6,2,"#00FF00"],[5,4,7,6,"#0000FF"],[4,0,3,7,"#0000FF"],[0,4,5,1,"#00FF00"],[3,2,6,7,"#FF0000"]];
 		this.angles = [0,0,0];
 		this.drawStyle = "rectangles";
 
@@ -166,7 +166,7 @@ documentReady(function(){
 				pressedKeyMove = true;
 			}
 			if(pressedKeyMove == false){
-				this.angles = this.p3D.incAngles(this.angles);
+				this.angles = this.p3D.incAnglesXY(this.angles);
 			}
 		}
 		
