@@ -32,7 +32,7 @@ documentReady(function(){
 			[1,-1,1],
 			[-1,-1,1]
 		];
-		this.faces = [[0,1,2,3,"#FF0000"],[1,5,6,2,"#00FF00"],[5,4,7,6,"#0000FF"],[4,0,3,7,"#0000FF"],[0,4,5,1,"#00FF00"],[3,2,6,7,"#FF0000"]];
+		this.faces = [[0,1,2,3,"#FF0000"],[1,5,6,2,"#00FF00"],[5,4,7,6,"#0000FF"],[4,0,3,7,"#FF00FF"],[0,4,5,1,"#F0FF0F"],[3,2,6,7,"#FFFF00"]];
 		this.angles = [0,0,0];
 		this.drawStyle = "rectangles";
 
@@ -115,27 +115,32 @@ documentReady(function(){
 		}
 		else{
 			this.ctx.strokeStyle = '#000000';
-			//this.ctx.beginPath();
+			var z, swap,temp,list = [];
 			for(var f in this.faces){
-				this.ctx.fillStyle = this.faces[f][4];
+				z = t[this.faces[f][0]][2] + t[this.faces[f][1]][2] + t[this.faces[f][2]][2] + t[this.faces[f][3]][2];
+				list.push([
+					[t[this.faces[f][0]][0],t[this.faces[f][0]][1]],
+					[t[this.faces[f][1]][0],t[this.faces[f][1]][1]],
+					[t[this.faces[f][2]][0],t[this.faces[f][2]][1]],
+					[t[this.faces[f][3]][0],t[this.faces[f][3]][1]],
+					z,
+					this.faces[f][4]
+				]);
+			}
+			list.sort(function(a,b){ return  b[4] - a[4] });
+			for(var face in list){
+				this.ctx.fillStyle = list[face][5];
 				this.ctx.beginPath();
-				this.ctx.moveTo(parseInt(t[this.faces[f][0]][0]), parseInt(t[this.faces[f][0]][1]));
-				this.ctx.lineTo(parseInt(t[this.faces[f][1]][0]), parseInt(t[this.faces[f][1]][1]));
-				this.ctx.lineTo(parseInt(t[this.faces[f][2]][0]), parseInt(t[this.faces[f][2]][1]));
-				this.ctx.lineTo(parseInt(t[this.faces[f][3]][0]), parseInt(t[this.faces[f][3]][1]));
+				this.ctx.moveTo(parseInt(list[face][0][0]),parseInt(list[face][0][1]));
+				this.ctx.lineTo(parseInt(list[face][1][0]), parseInt(list[face][1][1]));
+				this.ctx.lineTo(parseInt(list[face][2][0]), parseInt(list[face][2][1]));
+				this.ctx.lineTo(parseInt(list[face][3][0]), parseInt(list[face][3][1]));
 				this.ctx.fill();
 				this.ctx.stroke();
 				this.ctx.closePath();
 			}
-			
 
-			//this.ctx.closePath();
 		}
-		//ctx.restore();
-		//this.ctx.fillStyle = "#000000";
-		//this.ctx.fillRect(0,0, this.resolution[0], this.resolution[1]);
-		//this.ctx.fillStyle = "#FFFFFF";
-		
 
 		// Pressed keys or mouse mouvement
 		if(this.mouseIsDown == true 
