@@ -159,11 +159,11 @@ documentReady(function(){
 				pressedKeyMove = true;
 			}
 			if(this.isPressed("LEFT")){
-				this.angles[1] = (this.angles[1] - 1) % 360;
+				this.angles[1] = (this.angles[1] + 1) % 360;
 				pressedKeyMove = true;
 			}
 			if(this.isPressed("RIGHT")){
-				this.angles[1] = (this.angles[1] + 1) % 360;
+				this.angles[1] = (this.angles[1] - 1) % 360;
 				pressedKeyMove = true;
 			}
 			if(pressedKeyMove == false){
