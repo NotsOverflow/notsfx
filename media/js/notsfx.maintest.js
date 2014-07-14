@@ -32,7 +32,7 @@ documentReady(function(){
 			[1,-1,1],
 			[-1,-1,1]
 		];
-		this.faces = [[0,1,2,3],[1,5,6,2],[5,4,7,6],[4,0,3,7],[0,4,5,1],[3,2,6,7]];
+		this.faces = [[0,1,2,3,"#FF0000"],[1,5,6,2,"#00FF00"],[5,4,7,6,"#0000FF"],[4,0,3,7,"#FF0000"],[0,4,5,1,"#00FF00"],[3,2,6,7,"#0000FF"]];
 		this.angles = [0,0,0];
 		this.drawStyle = "rectangles";
 
@@ -96,11 +96,13 @@ documentReady(function(){
 			t.push(p);
 		}
 		if(this.drawStyle == "points"){
+			this.ctx.strokeStyle = '#FFFFFF';
 			for(var p in t){
 				this.ctx.fillRect(parseInt(t[p][0]),parseInt(t[p][1]),1,1);
 			}
 		}
 		else if(this.drawStyle == "lines"){
+			this.ctx.strokeStyle = '#FFFFFF';
 			this.ctx.beginPath();
 			for(var f in this.faces){
 				this.ctx.moveTo(parseInt(t[this.faces[f][0]][0]), parseInt(t[this.faces[f][0]][1]));
@@ -112,15 +114,22 @@ documentReady(function(){
 			this.ctx.stroke();
 		}
 		else{
-			this.ctx.beginPath();
+			this.ctx.strokeStyle = '#000000';
+			//this.ctx.beginPath();
 			for(var f in this.faces){
+				this.ctx.fillStyle = this.faces[f][4];
+				this.ctx.beginPath();
 				this.ctx.moveTo(parseInt(t[this.faces[f][0]][0]), parseInt(t[this.faces[f][0]][1]));
 				this.ctx.lineTo(parseInt(t[this.faces[f][1]][0]), parseInt(t[this.faces[f][1]][1]));
 				this.ctx.lineTo(parseInt(t[this.faces[f][2]][0]), parseInt(t[this.faces[f][2]][1]));
 				this.ctx.lineTo(parseInt(t[this.faces[f][3]][0]), parseInt(t[this.faces[f][3]][1]));
+				this.ctx.fill();
+				this.ctx.stroke();
+				this.ctx.closePath();
 			}
-			this.ctx.closePath();
-			this.ctx.stroke();
+			
+
+			//this.ctx.closePath();
 		}
 		//ctx.restore();
 		//this.ctx.fillStyle = "#000000";
