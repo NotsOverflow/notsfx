@@ -25,10 +25,12 @@ var Nfx = function(options){
 			'17"' : ["1280","720"],
 			"360p" : ["640", "360"]
 		},
+		selectedRes : "360p",
 		camAccessTimeout : 30,
 		enableCamAudio : true,
 		targetFps : 60,
 		loopIntervalTime : 10,
+		noTweek : false,
 		loopsBeforTweek : 2000
 
 	}, options || {});
@@ -64,6 +66,7 @@ var Nfx = function(options){
 
 
 	this.mediaElement = false;
+    this.resolution = this._options.resolutions[this._options.selectedRes];
 	this.videoSources = [];
 
 	// core functions
@@ -114,6 +117,7 @@ var Nfx = function(options){
 	this._setFullScreenSize = function(){
 		this._options.resolutions["fullScreen"][0] = parseInt(window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth);
 		this._options.resolutions["fullScreen"][1] = parseInt(window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight);
+		this.resolution = this._options.resolutions[this._options.selectedRes];
 		return this._options.resolutions["fullScreen"];
 	};
 	this._resizeScreen = function(){
@@ -152,13 +156,13 @@ var Nfx = function(options){
 					return true;
 				}
 				this._setTimeStamp();
-				if(this._getDeltaTime >= this._deltaTime){
+				if(this._getDeltaTime >= this._deltaTime && this._options.noTweek == false){
 					this.debug('[ info ] Your computer is to slow ! tweeking down ...', 2);
 					this.tweekDown();
 					this._tweekedDown = true;
 				}
 				else{
-					if(this._tweekedDown == false){
+					if(this._tweekedDown == false  && this._options.noTweek == false){
 						if(this._tweekCount > this._options.loopsBeforTweek){
 							this.debug('[ info ] Your computer is quick ! tweeking up ...', 2);
 							this.tweekUp();
@@ -255,7 +259,7 @@ var Nfx = function(options){
 	};
 	this.unpause = function(){
 		this._options.run = true;
-		this._doLoop();
+		this._loopInterval = this._window.setTimeout(function(){this._doLoop()}.bind(this), this._options.loopIntervalTime);
 	};
 	this.isPressed = function(key){
 		for (var attr in this._pressedKeys) {  
@@ -265,6 +269,14 @@ var Nfx = function(options){
             	return true;
             }
         } 
+        this.debug('[ info ] key pressed test : \''+ key +'\' is not pressed', 3);
+        return false;
+	};
+	this.isPressedUni = function(uniCode){
+        if(this._pressedKeys[uniCode]){
+            this.debug('[ info ] key pressed test : : \''+ this._pressedKeys[uniCode] +'\' is pressed ', 3);
+            return true;
+        }
         this.debug('[ info ] key pressed test : \''+ key +'\' is not pressed', 3);
         return false;
 	};
@@ -352,7 +364,7 @@ var Nfx = function(options){
     this._setDeltaTime();
     this._setFullScreenSize();
 
-    this._init();
+    this._loopInterval = this._window.setTimeout(function(){this._init()}.bind(this), this._options.loopIntervalTime);
 
 	return this;
 };
