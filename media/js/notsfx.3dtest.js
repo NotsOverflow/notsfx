@@ -30,6 +30,14 @@ var Point3D = function(){
 		angles[1] = (angles[1] + 1) % 360 ;
 		return angles;	
 	};
+	this.incAnglesX = function(angles){
+		angles[1] = (angles[1] + 1) % 360 ;
+		return angles;	
+	};
+	this.incAnglesY = function(angles){
+		angles[0] = (angles[0] + 1) % 360 ;
+		return angles;	
+	};
 	this.rotX = function(points,angle){
 		var rad   =	Math.radian(angle);
 		var cosa  =	Math.cos(rad);

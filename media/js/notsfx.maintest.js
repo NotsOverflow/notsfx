@@ -141,10 +141,10 @@ documentReady(function(){
 		if(this.mouseIsDown == true 
 		&& this.mousePos != false
 		&& this.prevMousePos != false){
-			var x = this.prevMousePos[0] - this.mousePos[0];
-			var y = this.prevMousePos[1] - this.mousePos[1];
+			var y = this.prevMousePos[0] - this.mousePos[0];
+			var x = this.prevMousePos[1] - this.mousePos[1];
 			if(x != 0 && y != 0){
-				this.angles = [(this.angles[0] - x) % 360, (this.angles[1] - y) % 360 , this.angles[2]];
+				this.angles = [(this.angles[0] + x) % 360, (this.angles[1] + y) % 360 , this.angles[2]];
 			}
 			
 		}
@@ -166,7 +166,7 @@ documentReady(function(){
 				pressedKeyMove = true;
 			}
 			if(pressedKeyMove == false){
-				this.angles = this.p3D.incAnglesXY(this.angles);
+				this.angles = this.p3D.incAnglesX(this.angles);
 			}
 		}
 		
