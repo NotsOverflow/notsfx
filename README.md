@@ -5,6 +5,8 @@ notsfx
 
 - todo:
 
+>	make a 3D api
+
 >	add webrtc api ( maybe peerJS )
 
 >	add multiple camera api for opera, firefox and ie
@@ -14,6 +16,10 @@ notsfx
 >	add effect prototypes ( jquery.animate-like )
 
 >	add create media prototypes
+
+- changelog 0.3d:
+
+>	added 3D!!!!
 
 - changelog 0.2:
 

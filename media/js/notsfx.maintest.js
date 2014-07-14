@@ -175,7 +175,6 @@ documentReady(function(){
 				this.angles = this.p3D.incAnglesX(this.angles);
 			}
 		}
-		
 		return true;
 	};
 });
