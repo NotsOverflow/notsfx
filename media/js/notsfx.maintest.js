@@ -11,7 +11,7 @@
 
 documentReady(function(){
 	var someTimeStamp = new Date().getTime();
-	var someFPS = 0;
+	var someFPS = 60;
 	var someCount = 0;
 	var nfx = Nfx({mediaElement : 'body', verbosity : 2, noTweek : true, targetFps : 70});
 	window.nfx = nfx;
@@ -160,6 +160,7 @@ documentReady(function(){
 			}
 			if(this.isPressed("LEFT")){
 				this.angles[1] = (this.angles[1] - 1) % 360;
+				pressedKeyMove = true;
 			}
 			if(this.isPressed("RIGHT")){
 				this.angles[1] = (this.angles[1] + 1) % 360;
